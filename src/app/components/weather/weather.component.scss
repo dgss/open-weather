@@ -1,0 +1,40 @@
+@import "../../assets/scss/variables.scss";
+@import "../../assets/scss/mixins.scss";
+
+app-weather {
+  width: 100%;
+  height: 100%;
+  @include _flex(column, nowrap, stretch, space-between);
+  overflow: hidden;
+
+  >.details-view {
+    @include _absolute($top: 0, $right: 0, $bottom: 0, $left: 0, $width: auto, $height: auto, $zIndex: 10);
+    pointer-events: none;
+    opacity: 0;
+    transition: $showTransitionVeryShort;
+
+    >.background {
+      transition: $showTransitionShort;
+      @include _absolute($top: 0, $right: 0, $bottom: 0, $left: 0, $width: auto, $height: auto, $zIndex: 10);
+      transform: translate3d(0, 0, 0) scale(1, 0.2);
+      transform-origin: top center;
+    }
+
+    >app-city-forecast {
+      z-index: 20;
+    }
+
+    @include _applyColors {
+      &.#{$activeColorName} {
+        >.background {
+          background-color: $activeColorCode;
+        }
+      }
+    }
+
+    &.show {
+      pointer-events: all;
+      opacity: 1;
+    }
+  }
+}

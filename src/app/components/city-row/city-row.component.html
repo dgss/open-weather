@@ -1,0 +1,24 @@
+<div class="city-row" *ngIf="source" [ngClass]="[color,isHidden]" (click)="cityClicked()">
+  <div class='textual-info'>
+    <div class="city-basic-info">
+      {{name}}
+    </div>
+    <div class="weather-status">
+      <div class="temperature">
+        {{getTempratureRoundedValue()}}
+      </div>
+      <div class="situation">
+        {{source.weather[0].main}}
+      </div>
+      <div class="wind-status">
+        <span class="wind-text">
+          {{source.wind.speed}}
+        </span>
+        <span class="wind-arrow" [ngStyle]="{'transform':'rotateZ(' + source.wind.deg + 'deg)'}"></span>
+      </div>
+    </div>
+  </div>
+  <div class="city-icon" [ngClass]="[icon]">
+    <app-weather-icon [weatherCondition]="getWeatherIconEnum(source.weather[0].icon)"></app-weather-icon>
+  </div>
+</div>

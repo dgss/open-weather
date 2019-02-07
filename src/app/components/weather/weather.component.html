@@ -1,0 +1,11 @@
+<ng-container *ngIf="cities">
+  <ng-container *ngFor="let city of cities; let i = index">
+    <app-city-row [color]="city.color" [name]="city.name" [icon]="city.icon" (cityClick)='citySelected($event, i)'
+      [query]="city.q"></app-city-row>
+  </ng-container>
+  <div class="details-view" [ngClass]="[selectedColor, showDetailsClass]">
+    <div class="background" #detailBackground></div>
+    <app-city-forecast *ngIf="selectedCityItem" (closeDetails)="closeDetails()" [showInside]="showInside" [icon]="selectedCityItem.icon"
+      [name]="selectedCityItem.name" [query]="selectedCityItem.query" [currentTemprature]='selectedCityItem.getTempratureRoundedValue()'></app-city-forecast>
+  </div>
+</ng-container>

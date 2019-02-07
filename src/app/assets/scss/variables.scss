@@ -1,0 +1,53 @@
+/*Transitions*/
+$hoverTransition: all 1000ms cubic-bezier(0.25, 1.7, 0, 1);
+$hideTransition: all 750ms cubic-bezier(0.25, 1, 0, 1);
+$showTransition: all 950ms cubic-bezier(0.25, 1, 0, 1);
+$showTransitionShort: all 650ms cubic-bezier(0.25, 1, 0, 1);
+$showTransitionVeryShort: all 250ms cubic-bezier(0.25, 1, 0, 1);
+$detailsStartDelay: 150ms;
+
+
+/*COLORS*/
+$whiteFillTransparent: rgba(255, 255, 255, 0.2);
+$textColorLight: #ffffff;
+$textColorDark: #666666;
+
+$activeColorName: green;
+$activeColorCode: #56e6c4;
+$activeColorIsLight: false;
+$colors: (green: (color:#6bcc8a, isLight:false),
+blue: (color:#94cbcc, isLight:false),
+red: (color:#f56b6b, isLight:false),
+coffee: (color:#c1b9a9, isLight:false),
+light-blue: (color:#3fd0d2, isLight:false),
+yellow: (color:#ffc007, isLight:false),
+gray: (color:#b3b3b3, isLight:false));
+
+/*Texts & Sizes*/
+%header {
+  font-family: 'Nunito', sans-serif;
+}
+
+%detail {
+  font-family: 'Barlow Condensed', sans-serif;
+}
+
+$bigIconSize: 18vh;
+$smallPush: 2vmin;
+$borderThinSize: 0.5vh;
+$borderUltraThinSize: 0.25vh;
+$borderTitleRadius: 12vh;
+$detailTitleSize: 12vmin;
+$titleSmallTextSize: 6vmin;
+$titleSmallishTextSize: 5vmin;
+$titleTinyTextSize: 3vmin;
+
+/* Images & Icons */
+$activeCityIconName: windmill;
+$activeCityIcon: url('../../assets/images/windmill.svg');
+
+$cityIcons: (windmill: url('../../assets/images/windmill.svg'),
+eiffel: url('../../assets/images/eiffel.svg'),
+pisa: url('../../assets/images/pisa.svg'),
+galata: url('../../assets/images/galata.svg'),
+tvtower: url('../../assets/images/tvtower.svg'));

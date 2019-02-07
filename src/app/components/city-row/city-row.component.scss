@@ -1,0 +1,165 @@
+@import "../../assets/scss/variables.scss";
+@import "../../assets/scss/mixins.scss";
+@import "../../assets/scss/anims.scss";
+
+app-city-row {
+  position: relative;
+  flex: 1;
+  display: block;
+  cursor: pointer;
+  transform: translate3d(0, 0, 0);
+  height: 20%;
+  max-height: 20%;
+
+  >.city-row {
+    @include _flex(row, nowrap, center, flex-start);
+    background-color: map-get(map-get($colors, grey), color);
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+    position: relative;
+
+    &:after {
+      content: '';
+      @include _absolute(0, 0, 0, 0, 100%, 100%, 10);
+      transition: $hideTransition;
+      background-color: $textColorLight;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    &:hover:after {
+      transition: $hoverTransition;
+      opacity: 0.25;
+    }
+
+    @include _applyColors {
+      &.#{$activeColorName} {
+        background-color: $activeColorCode;
+
+        @if $activeColorIsLight==true {
+          color: $textColorDark;
+        }
+
+        @else {
+          color: $textColorLight;
+        }
+      }
+    }
+
+    >.textual-info {
+      flex: 1;
+      @include _flex(column, nowrap, flex-start, center);
+      padding: $titleSmallTextSize;
+      height: 100%;
+      box-sizing: border-box;
+
+      >.city-basic-info {
+        @extend %header;
+        @include _visibleState;
+        transition: $hideTransition;
+        font-size: $titleSmallTextSize;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        flex: 1;
+        @include _flex($direction: column, $justify:flex-end);
+        width: 100%;
+      }
+
+      >.weather-status {
+        @extend %detail;
+        @include _flex(row, nowrap, baseline, flex-start);
+        transition: $hideTransition;
+        flex: 1;
+        line-height: $titleSmallTextSize;
+        width: 100%;
+
+        >.temperature {
+          @extend %detail;
+          display: inline-block;
+          font-size: $titleSmallTextSize;
+          @include _tempratureSuffix;
+
+          &:after {
+            font-size: $titleSmallishTextSize;
+          }
+        }
+
+        >.situation {
+          display: block;
+          font-size: $titleSmallishTextSize;
+          margin-left: $smallPush;
+        }
+
+        >.wind-status {
+          margin-left: $smallPush;
+
+          >.wind-arrow {
+            display: inline-block;
+            background: url(../../assets/images/right.svg) center center no-repeat;
+            background-size: contain;
+            border: $borderUltraThinSize solid $textColorLight;
+            width: $titleSmallishTextSize;
+            height: $titleSmallishTextSize;
+            border-radius: $titleSmallishTextSize;
+            box-sizing: border-box;
+          }
+
+          >.wind-text {
+            margin-right: $smallPush;
+            font-size: $titleSmallishTextSize;
+
+            &:after {
+              font-size: $titleTinyTextSize;
+              content: 'm/sec'
+            }
+          }
+        }
+      }
+    }
+
+    >.city-icon {
+      transition: $showTransition;
+      box-sizing: border-box;
+      height: $bigIconSize;
+      width: $bigIconSize;
+      margin-top: $smallPush;
+      position: relative;
+
+      >app-weather-icon {
+        @include _absolute($top: 0, $left: 0, $width: 60%, $height: 60%, $zIndex: 5);
+        animation: stroll-weather-icon 60s linear infinite backwards;
+      }
+
+      &:after {
+        content: "";
+        @include _absolute($top: 0, $right: 0, $bottom: -5px, $left: 0, $width: auto, $height: auto, $zIndex: 10);
+        background: right bottom no-repeat;
+        background-size: contain;
+      }
+
+      @include _applyCityIcons {
+        &.#{$activeCityIconName}:after {
+          background-image: $activeCityIcon;
+        }
+      }
+    }
+
+    &.hidden {
+      >.textual-info {
+
+        >.city-basic-info,
+        >.weather-status {
+          transition: $hideTransition;
+          @include _invisibleStateRev;
+        }
+      }
+
+      >.city-icon {
+        transition: $hideTransition;
+        opacity: 0;
+      }
+    }
+  }
+}

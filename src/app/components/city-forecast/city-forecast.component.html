@@ -1,0 +1,28 @@
+<div class="city-forecast" [ngClass]="[showInsideDetailsClass]">
+  <div class='title'>
+    <div class="city-icon" [ngClass]="[icon]">
+    </div>
+    <div class="city-name">
+      {{name}}
+    </div>
+    <div class="temprature">
+      Now: {{currentTemprature}}
+    </div>
+  </div>
+  <div class="forecast-list" *ngIf="source">
+    <div class="forecast-group-day"
+      *ngFor="let day of getForecastDays()">
+      <div class="day-info">{{day}}</div>
+      <div class="forecast-item" *ngFor="let forecast of source[day]">
+        <div class="time-info">
+          {{forecast.time}}
+        </div>
+        <div class="dots"></div>
+        <div class="temprature">
+          {{getTempratureRoundedValue(forecast.main.temp)}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="close-button" (click)="requestClose()"></div>
+</div>

@@ -1,0 +1,108 @@
+@mixin _applyColors() {
+
+  @each $colorName,
+  $colorValue in $colors {
+    $activeColorName: $colorName !global;
+    $activeColorCode: map-get($colorValue, color) !global;
+    $activeColorIsLight: map-get($colorValue, isLight) !global;
+    @content;
+  }
+}
+
+@mixin _applyCityIcons() {
+
+  @each $cityIconName,
+  $cityIcon in $cityIcons {
+    $activeCityIconName: $cityIconName !global;
+    $activeCityIcon: $cityIcon !global;
+    @content;
+  }
+}
+
+@mixin _tempratureSuffix {
+  &:after {
+    content: '°c';
+    display: inline-block;
+  }
+}
+
+@mixin _invisibleState {
+  transform: translate3d(0, 50px, 0) scale(1, 1.2);
+  opacity: 0;
+}
+@mixin _invisibleStateRev {
+  transform: translate3d(0, -50px, 0) scale(1, 1.2);
+  opacity: 0;
+}
+
+@mixin _visibleState {
+  transform: translate3d(0, 0, 0) scale(1);
+  opacity: 1;
+}
+
+@mixin _absolute($top: null, $right: null, $bottom: null, $left: null, $width: null, $height: null, $zIndex: null) {
+  position: absolute;
+
+  @if ($top) {
+    top: $top;
+  }
+
+  @if ($right) {
+    right: $right;
+  }
+
+  @if ($bottom) {
+    bottom: $bottom;
+  }
+
+  @if ($left) {
+    left: $left;
+  }
+
+  @if ($zIndex) {
+    z-index: $zIndex;
+  }
+
+  @if ($width) {
+    width: $width;
+  }
+
+  @else {
+    width: auto;
+  }
+
+  @if ($height) {
+    height: $height;
+  }
+
+  @else {
+    height: auto;
+  }
+}
+
+
+@mixin _flex($direction: null, $wrap: null, $align: null, $justify: null, $isInline: false) {
+  @if($isInline) {
+    display: inline-flex;
+  }
+
+  @else {
+    display: flex;
+  }
+
+  @if ($direction) {
+    flex-direction: $direction;
+  }
+
+  @if ($wrap) {
+    flex-wrap: $wrap;
+  }
+
+  @if ($align) {
+    align-items: $align;
+  }
+
+  @if ($justify) {
+    justify-content: $justify;
+  }
+}
